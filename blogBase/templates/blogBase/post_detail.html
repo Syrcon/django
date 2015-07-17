@@ -1,0 +1,42 @@
+{% extends 'blogBase/base.html' %}
+{% load blogBase_tags %}
+
+{% block content %}
+<div id="content_detail">
+    <h3>{{ post.title }}</h3>
+    <h3>Автор: {{ post.author }}</h3>
+    <h3>Опубликован {{ post.datetime }}</h3>
+    <p>{{ post.content }}</p>
+    <hr>
+
+
+
+<div class="container" id="comment_cont">
+    <h4>Комментарии</h4>
+    {% getcomments for post as comment_list %}
+    {% for comment in comment_list %}
+        <p>{{ comment.author }} | {{ comment.datetime }} <br>
+	    {{ comment.content }}</p>
+        <hr>
+    {% empty %}
+    <p>Нет комментариев</p>
+    {% endfor %}
+</div>
+
+
+<div class="container">
+{% if user.is_authenticated %}
+Введите ваш комментарий
+
+<form action="" method="POST" id="comment-form">
+    {% csrf_token %}
+    <table>
+        {{ form.content }}
+    </table>
+    <input type="submit" name="submit" value="Submit" id="comment-submit"/>
+</form>
+    <br>
+{% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+from blogBase.models import Post, Comment
+from django.views.generic import ListView, DetailView
+
+class PostsListView(ListView):
+	model = Post
+
+class PostDetailView(DetailView):
+	model = Post
+	model = Comment

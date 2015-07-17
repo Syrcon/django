@@ -1,0 +1,13 @@
+{% extends 'blogBase/base.html' %}
+
+{% block content %}
+    {% for post in object_list %}
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+	    <h3>Автор поста: {{ post.author }}</h3>
+        <h3>Опубликован {{ post.datetime }}</h3>
+        <hr>
+    {% empty %}
+    <p>Нет постов</p>
+    {% endfor %}
+
+{% endblock %}
